@@ -1,65 +1,322 @@
 import Image from "next/image";
+import { BuildSomething } from "./BuildSomething";
+import { CopyEmailLink } from "./CopyEmailLink";
+
+const LINKEDIN_URL = "https://www.linkedin.com/in/mkarkach/";
+const TELEGRAM_URL = "http://t.me/maksay17";
+const BEHANCE_URL = "https://www.behance.net/maksay56";
+const INSTAGRAM_URL = "https://www.instagram.com/m_karkach/";
+const PINTEREST_URL = "https://pinterest.com/maksay56/";
+
+const NAV_LINKS = [
+  { label: "Linkedin", href: LINKEDIN_URL },
+  { label: "Telegram", href: TELEGRAM_URL },
+  { label: "Resume", href: "#" },
+];
+
+const PROJECTS = [
+  {
+    title: "3D Illustrations for a Fintech Trading Product",
+    description:
+      "Art direction and 3D design for product and marketing visuals - from concept to final render.",
+    image: "/images/project1.png",
+    href: "https://www.behance.net/gallery/233444249/3D-illustrations-for-Fintech-company",
+  },
+  {
+    title: "Promo Campaign for an Investing App",
+    description: "Creative concept, key visual, and campaign assets across formats.",
+    image: "/images/project2.png",
+    href: "https://www.behance.net/gallery/205404503/Promo-campaign-for-investing-app",
+  },
+];
+
+const CAREER = [
+  {
+    company: "Garage Eight",
+    logo: "/images/logo-garage.svg",
+    roles: [
+      {
+        title: "product designer",
+        period: "2023 - now",
+        description:
+          "Optimized B2C trader funnels (KYC & activation) and designed B2B platforms: an IB partner portal and an internal admin dashboard",
+      },
+      {
+        title: "communication designer",
+        period: "2019-2023",
+        description:
+          "Brand campaign design, driving metrics through design testing and systematizing best practices into guidelines",
+      },
+    ],
+  },
+  {
+    company: "Blockchain center technology",
+    logo: "/images/logo-blockchain.svg",
+    roles: [
+      {
+        title: "graphic designer",
+        period: "2017-2019",
+        description:
+          "Designed and coded landing pages, banners, and brand/social content. Handled print materials and on-page SEO.",
+      },
+    ],
+  },
+];
+
+const POSTS = [
+  {
+    title: "Design Trends 2026: Stateless Interfaces, Zero-Input, and the Return of Human Error",
+    views: "14к",
+    href: "https://habr.com/ru/companies/garage8/articles/978626/",
+  },
+  {
+    title: "7 Design Trends of 2025: Imperfection and Retro Aesthetics vs. Flawless AI",
+    views: "35к",
+    href: "https://habr.com/ru/companies/garage8/articles/874326/",
+  },
+];
+
+const FOOTER_LINKS = [
+  { label: "behance", href: BEHANCE_URL },
+  { label: "pinterest", href: PINTEREST_URL },
+  { label: "instagram", href: INSTAGRAM_URL },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="mx-auto max-w-[1280px] px-[15px] md:px-[30px]">
+      <header className="flex flex-row items-start justify-between gap-[15px] pt-[20px] pb-0 md:items-center">
+        <p className="text-[20px] font-semibold tracking-[-1px]">maksim karkach</p>
+        <nav className="flex flex-col items-end gap-[10px] text-[15px] tracking-[-0.75px] font-medium md:flex-row md:items-center md:gap-[25px] md:text-[20px] md:tracking-[-1px]">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("#") ? undefined : "_blank"}
+              rel={link.href.startsWith("#") ? undefined : "noopener noreferrer"}
+              className="link-underline"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      <section className="flex flex-col gap-[10px] pb-[50px] md:pb-[150px] md:pt-[75px]">
+        <div className="flex flex-col-reverse items-start gap-[15px] md:flex-row md:justify-between md:gap-[24px]">
+          <h1 className="max-w-[880px] text-[25px] font-semibold leading-[normal] tracking-[-1.25px] md:text-[42px] md:tracking-[-2.1px]">
+            Product designer with 7 years in FinTech,{" "}
+            <span className="font-medium text-[#383838]">
+              designing trading platforms, partner systems, and internal tools.
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <Image
+            src="/images/hero-photo.png"
+            alt="Maksim Karkach"
+            width={160}
+            height={160}
+            quality={95}
+            className="size-[142px] shrink-0 self-start rounded-[8px] object-cover md:size-[160px]"
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+        <div className="flex flex-wrap items-center gap-[15px] text-[15px] font-medium tracking-[-0.75px] text-[#383838] md:gap-[25px] md:text-[20px] md:tracking-[-1px]">
+          <p>Saint Petersburg</p>
+          <div className="flex items-center gap-[8px]">
+            <span className="status-dot size-[8px] rounded-full bg-[#3ddc84]" />
+            <p>Open to collaboration</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 gap-[25px] pb-[50px] md:gap-[20px] md:pb-[150px] md:grid-cols-2">
+        {PROJECTS.map((project) => (
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            key={project.title}
+            href={project.href}
             target="_blank"
             rel="noopener noreferrer"
+            className="group flex flex-col gap-[10px] md:gap-[20px]"
+          >
+            <div className="overflow-hidden rounded-[8px]">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={600}
+                height={326}
+                quality={95}
+                className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </div>
+            <div className="flex flex-col gap-[5px] md:gap-[10px]">
+              <h3 className="text-[20px] font-semibold leading-[normal] tracking-[-1px] md:text-[30px] md:tracking-[-1.5px]">
+                {project.title}
+              </h3>
+              <p className="text-[15px] font-medium leading-[20px] tracking-[-0.45px] text-[#383838] md:text-[20px] md:leading-[24px] md:tracking-[-0.6px]">
+                {project.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </section>
+
+      <section className="flex flex-col gap-[20px] pb-[50px] md:pb-[75px]">
+        <h2 className="text-[20px] font-semibold tracking-[-1px] md:text-[32px] md:tracking-[-1.6px]">
+          Career
+        </h2>
+        <div className="flex flex-col gap-[40px]">
+          {CAREER.map((company) => (
+            <div
+              key={company.company}
+              className="flex flex-col gap-[20px] border-t border-[#e5e5e5] pt-[10px] md:pt-[20px]"
+            >
+              <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:items-start">
+                <div className="flex items-center gap-[15px]">
+                  <Image
+                    src={company.logo}
+                    alt={company.company}
+                    width={32}
+                    height={32}
+                    className="size-[32px] shrink-0"
+                  />
+                  <p className="text-[20px] font-semibold leading-[100%] tracking-[-1px] md:text-[32px] md:leading-[120%] md:tracking-[-1.6px]">
+                    {company.company}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-[25px]">
+                  {company.roles.map((role) => (
+                    <div key={role.title} className="flex flex-col gap-[10px]">
+                      <div className="flex flex-row items-start justify-between gap-[10px] text-[20px] font-semibold leading-[120%] tracking-[-1px] md:text-[32px] md:leading-normal md:tracking-[-1.6px]">
+                        <p>{role.title}</p>
+                        <p className="shrink-0 whitespace-nowrap">{role.period}</p>
+                      </div>
+                      <p className="text-[15px] font-medium leading-[20px] tracking-[-0.45px] text-[#383838] md:text-[20px] md:leading-[26px] md:tracking-[-0.6px]">
+                        {role.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-[20px]">
+        <h2 className="text-[20px] font-semibold tracking-[-1px] md:text-[32px] md:tracking-[-1.6px]">
+          Thinking out loud
+        </h2>
+        <div className="grid grid-cols-1 gap-[10px] md:gap-[20px] md:grid-cols-2">
+          {POSTS.map((post) => (
+            <a
+              key={post.title}
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-[10px] rounded-[8px] bg-[#f5f5f5] p-[10px] transition-colors duration-300 ease-out hover:bg-[#efefef] md:px-[20px] md:py-[15px]"
+            >
+              <p className="text-[15px] font-medium leading-[normal] tracking-[-0.45px] text-[#383838] md:text-[20px] md:tracking-[-0.6px]">
+                {post.title}
+                <ArrowUpRightIcon className="ml-[4px] inline-block size-[0.9em] -translate-x-[4px] align-[-0.1em] opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100" />
+              </p>
+              <div className="flex items-center gap-[10px]">
+                <Image
+                  src="/images/blog-icon.png"
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="size-[16px] rounded-[4px]"
+                />
+                <div className="flex items-center gap-[5px] opacity-75">
+                  <EyeIcon />
+                  <p className="text-[12px] font-medium tracking-[-0.6px] text-[#303034] md:text-[15px] md:tracking-[-0.75px]">
+                    {post.views}
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col items-center gap-[20px] pt-[50px] pb-[50px] text-center md:gap-[40px] md:pt-[125px] md:pb-[125px]">
+        <BuildSomething />
+        <div className="flex flex-col items-center gap-[20px]">
+          <a
+            href={TELEGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-[10px] rounded-[8px] bg-[#161616] px-[15px] py-[10px] text-[15px] font-medium tracking-[-0.75px] text-[#fefefe] transition-colors duration-300 ease-out hover:bg-[#333333] md:text-[20px] md:tracking-[-1px]"
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
+              src="/images/telegram-icon.svg"
+              alt=""
               width={16}
               height={16}
+              className="size-[16px]"
             />
-            Deploy Now
+            Message me on Telegram
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer"
+            className="link-underline rounded-[8px] text-[15px] font-medium tracking-[-0.75px] md:text-[20px] md:tracking-[-1px]"
           >
-            Documentation
+            or Linkedin
           </a>
         </div>
-      </main>
+      </section>
+
+      <footer className="flex flex-col items-center gap-[15px] border-t border-[#e5e5e5] pt-[20px] pb-[30px] text-center text-[15px] font-medium tracking-[-0.75px] md:flex-row md:items-center md:justify-between md:text-left md:text-[20px] md:tracking-[-1px]">
+        <CopyEmailLink email="maksay95@gmail.com" />
+        <div className="flex w-full items-center justify-between md:w-auto md:gap-[25px]">
+          {FOOTER_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </footer>
     </div>
+  );
+}
+
+function ArrowUpRightIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M5 11L11 5M11 5H6M11 5V10"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function EyeIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M1 8C1 8 3.5 3 8 3C12.5 3 15 8 15 8C15 8 12.5 13 8 13C3.5 13 1 8 1 8Z"
+        stroke="#303034"
+        strokeWidth="1.2"
+      />
+      <circle cx="8" cy="8" r="2.2" stroke="#303034" strokeWidth="1.2" />
+    </svg>
   );
 }
