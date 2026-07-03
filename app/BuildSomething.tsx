@@ -15,6 +15,15 @@ export function BuildSomething() {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     const node = ref.current;
@@ -48,7 +57,11 @@ export function BuildSomething() {
       className="flex flex-col items-center gap-[10px] md:flex-row md:gap-[25px]"
     >
       <motion.p
-        animate={{ x: isInView ? 0 : 80, opacity: isInView ? 1 : 0 }}
+        animate={
+          isMobile
+            ? { y: isInView ? 0 : 40, opacity: isInView ? 1 : 0 }
+            : { x: isInView ? 0 : 80, opacity: isInView ? 1 : 0 }
+        }
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-[25px] font-semibold tracking-[-1.25px] md:text-[48px] md:tracking-[-2.4px]"
       >
@@ -58,7 +71,9 @@ export function BuildSomething() {
         animate={{
           clipPath: isInView
             ? "inset(0% 0% 0% 0% round 8px)"
-            : "inset(0% 50% 0% 50% round 8px)",
+            : isMobile
+              ? "inset(50% 0% 50% 0% round 8px)"
+              : "inset(0% 50% 0% 50% round 8px)",
         }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
         className="relative size-[160px] overflow-hidden rounded-[8px]"
@@ -84,7 +99,11 @@ export function BuildSomething() {
         </AnimatePresence>
       </motion.div>
       <motion.p
-        animate={{ x: isInView ? 0 : -80, opacity: isInView ? 1 : 0 }}
+        animate={
+          isMobile
+            ? { y: isInView ? 0 : -40, opacity: isInView ? 1 : 0 }
+            : { x: isInView ? 0 : -80, opacity: isInView ? 1 : 0 }
+        }
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-[25px] font-semibold tracking-[-1.25px] md:text-[48px] md:tracking-[-2.4px]"
       >
