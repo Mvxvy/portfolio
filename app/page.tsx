@@ -11,7 +11,7 @@ const PINTEREST_URL = "https://pinterest.com/maksay56/";
 const NAV_LINKS = [
   { label: "Linkedin", href: LINKEDIN_URL },
   { label: "Telegram", href: TELEGRAM_URL },
-  { label: "Resume", href: "#" },
+  { label: "Resume", href: "/Maksim-Karkach-CV.pdf" },
 ];
 
 const PROJECTS = [
@@ -185,7 +185,7 @@ export default function Home() {
                 <div className="flex flex-col gap-[25px]">
                   {company.roles.map((role) => (
                     <div key={role.title} className="flex flex-col gap-[10px]">
-                      <div className="flex flex-row items-start justify-between gap-[10px] text-[20px] font-semibold leading-[120%] tracking-[-1px] md:text-[32px] md:leading-normal md:tracking-[-1.6px]">
+                      <div className="flex flex-row items-start justify-between gap-[10px] text-[20px] font-semibold leading-[120%] tracking-[-1px] md:text-[32px] md:tracking-[-1.6px]">
                         <p>{role.title}</p>
                         <p className="shrink-0 whitespace-nowrap">{role.period}</p>
                       </div>
