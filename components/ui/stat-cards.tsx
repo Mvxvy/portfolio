@@ -98,7 +98,7 @@ export function StatCardsGrid({
               {item.detail && (
                 <p
                   className={cn(
-                    "font-medium tracking-[-0.3px] text-[#383838]",
+                    "font-medium tracking-[-0.3px] text-[#8a8a8a]",
                     size === "lg" ? "text-[13px] md:text-[15px]" : "text-[13px]"
                   )}
                 >

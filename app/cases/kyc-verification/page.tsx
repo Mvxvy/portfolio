@@ -110,10 +110,10 @@ const RESULTS = [
 ];
 
 const TIME_RESULTS = [
-  { value: "−52%", label: "Residence", detail: "average time" },
-  { value: "−29%", label: "ID Proof", detail: "median 48→34s" },
-  { value: "−14%", label: "TIN", detail: "average time" },
-  { value: "−12%", label: "Trading Knowledge", detail: "average time" },
+  { value: "−52%", label: "Residence" },
+  { value: "−29%", label: "ID Proof" },
+  { value: "−14%", label: "TIN" },
+  { value: "−12%", label: "Trading Knowledge" },
 ];
 
 export default function KycVerificationCase() {
@@ -180,10 +180,13 @@ export default function KycVerificationCase() {
         <SectionLabel>What I found and did</SectionLabel>
 
         <div className="flex flex-col gap-[75px]">
-          {SOLUTIONS.map((solution) => (
+          {SOLUTIONS.map((solution, i) => (
             <div key={solution.title} className="flex flex-col gap-[15px]">
               <div className="flex items-start justify-between gap-[15px] md:gap-[25px]">
-                <h3 className="text-[20px] font-semibold leading-[120%] tracking-[-0.6px]">
+                <h3 className="flex items-baseline gap-[10px] text-[20px] font-semibold leading-[120%] tracking-[-0.6px]">
+                  <span className="tabular-nums text-[#8a8a8a]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {solution.title}
                 </h3>
                 <span
@@ -231,12 +234,22 @@ export default function KycVerificationCase() {
           cols={{ base: 1, md: 2 }}
         />
 
-        <StatCardsGrid
-          items={TIME_RESULTS}
-          size="sm"
-          className="grid-cols-2 md:grid-cols-4"
-          cols={{ base: 2, md: 4 }}
-        />
+        <div className="flex flex-col gap-[6px] md:flex-row md:items-baseline md:gap-[15px]">
+          <p className="shrink-0 text-[13px] font-medium text-[#8a8a8a] md:text-[15px]">
+            Time per step ↓
+          </p>
+          <p className="flex flex-wrap items-center gap-x-[8px] gap-y-[4px] text-[15px] font-medium tracking-[-0.3px] text-[#383838] md:text-[17px]">
+            {TIME_RESULTS.map((item, i) => (
+              <span key={item.label} className="flex items-center gap-x-[8px]">
+                {i > 0 && <span className="text-[#c5c5c5]">·</span>}
+                <span>
+                  {item.label}{" "}
+                  <span className="text-[#16a34a]">{item.value}</span>
+                </span>
+              </span>
+            ))}
+          </p>
+        </div>
 
         <div className="mt-[20px]">
           <Paragraph>
