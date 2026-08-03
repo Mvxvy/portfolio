@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,21 +13,19 @@ const SLIDES = [
 
 const MOBILE_QUERY = "(max-width: 767px)";
 
-function subscribeToMobile(onChange: () => void) {
-  const mql = window.matchMedia(MOBILE_QUERY);
-  mql.addEventListener("change", onChange);
-  return () => mql.removeEventListener("change", onChange);
-}
-
 export function BuildSomething() {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-  const isMobile = useSyncExternalStore(
-    subscribeToMobile,
-    () => window.matchMedia(MOBILE_QUERY).matches,
-    () => false
-  );
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia(MOBILE_QUERY);
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     const node = ref.current;
