@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SiBehance, SiInstagram, SiPinterest } from "react-icons/si";
 import { BuildSomething } from "./BuildSomething";
 import { CopyEmailLink } from "./CopyEmailLink";
 import { SoonCursorCard } from "./SoonCursorCard";
@@ -93,9 +94,9 @@ const POSTS = [
 ];
 
 const FOOTER_LINKS = [
-  { label: "behance", href: BEHANCE_URL },
-  { label: "pinterest", href: PINTEREST_URL },
-  { label: "instagram", href: INSTAGRAM_URL },
+  { label: "behance", href: BEHANCE_URL, Icon: SiBehance },
+  { label: "pinterest", href: PINTEREST_URL, Icon: SiPinterest },
+  { label: "instagram", href: INSTAGRAM_URL, Icon: SiInstagram },
 ];
 
 export default function Home() {
@@ -318,18 +319,20 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="flex flex-col items-center gap-[15px] border-t border-[#e5e5e5] pt-[20px] pb-[30px] text-center text-[15px] font-medium tracking-[-0.75px] md:flex-row md:items-center md:justify-between md:text-left md:text-[20px] md:tracking-[-1px]">
+      <footer className="flex flex-row items-center justify-between gap-[15px] border-t border-[#e5e5e5] pt-[20px] pb-[30px] text-[15px] font-medium tracking-[-0.75px] md:text-[20px] md:tracking-[-1px]">
         <CopyEmailLink email="maksay95@gmail.com" />
-        <div className="flex w-full items-center justify-between md:w-auto md:gap-[25px]">
-          {FOOTER_LINKS.map((link) => (
+        <div className="flex items-center gap-[24px] md:gap-[25px]">
+          {FOOTER_LINKS.map(({ label, href, Icon }) => (
             <a
-              key={link.label}
-              href={link.href}
+              key={label}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline"
+              aria-label={label}
+              className="link-underline -m-[12px] p-[12px] md:m-0 md:p-0"
             >
-              {link.label}
+              <Icon className="size-[20px] md:hidden" aria-hidden="true" />
+              <span className="hidden md:inline">{label}</span>
             </a>
           ))}
         </div>
