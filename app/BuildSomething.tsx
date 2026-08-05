@@ -15,9 +15,11 @@ const MOBILE_QUERY = "(max-width: 767px)";
 
 export function BuildSomething() {
   const ref = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const isInView = isVisible && imageLoaded;
 
   useEffect(() => {
     const mql = window.matchMedia(MOBILE_QUERY);
@@ -34,7 +36,7 @@ export function BuildSomething() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsInView(true);
+          setIsVisible(true);
           observer.disconnect();
         }
       },
@@ -95,6 +97,7 @@ export function BuildSomething() {
               width={160}
               height={160}
               quality={95}
+              onLoad={() => setImageLoaded(true)}
               className="size-full rounded-[8px] object-cover"
             />
           </motion.div>
